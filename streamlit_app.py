@@ -16,6 +16,8 @@ import pinecone
 # Load environment variables from .env file
 load_dotenv()
 
+API = os.getenv("GOOGLE_API_KEY")
+PINECONE = os.getenv("PINECONE_API_KEY")
 def get_pdf_text(pdf_docs):
     text = ""
     for pdf in pdf_docs:
