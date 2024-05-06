@@ -49,7 +49,7 @@ def get_vector_store(text_chunks):
     # Upsert items into the vector store with associated embeddings
     #index.upsert(vectors, ids=ids)  # Upsert the data with optional IDs
     #pc.upsert(index_name, text_chunks, vectors)
-    return docsearh
+    #return docsearh
 
 def get_conversational_chain(vector_store):
     llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=API_KEY, temperature=0.1)
