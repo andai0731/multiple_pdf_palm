@@ -34,6 +34,7 @@ def get_text_chunks(text):
     #documents = loader.load()
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     chunks = text_splitter.split_documents(text)
+    chunks = text_splitter.create_documents(splits)
     #chunks = text_splitter.split_text(text)
     return chunks
 
