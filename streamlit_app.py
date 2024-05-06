@@ -38,7 +38,7 @@ def get_text_chunks(text):
 def get_vector_store(text_chunks):
     embeddings = GooglePalmEmbeddings()
     # Initialize Pinecone
-    pinecone.init(api_key=os.getenv("PINECONE_API_KEY"))  # Use your Pinecone API key
+    pinecone.init(api_key=PINECONE)  # Use your Pinecone API key
     vector_store = pinecone.Index("llm")
     vector_store.upsert(items=text_chunks, ids=range(len(text_chunks)))
     return vector_store
