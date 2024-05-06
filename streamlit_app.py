@@ -27,11 +27,12 @@ def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
     chunks = text_splitter.split_text(text)
     return chunks
-
-def generate_embeddings(text_chunks):
+    
+def generate_embeddings(text_chunks):                                    
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    vectors = embeddings.embed_query([chunk.page_content for chunk in text_chunks])
-    return vectors
+    vectors = embeddings.embed_query(text_chunks)
+    return vectors  
+
 
 def get_vector_store(text_chunks):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
