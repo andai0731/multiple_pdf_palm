@@ -9,6 +9,9 @@ from dotenv import load_dotenv
 from pinecone import Pinecone
 import os
 
+from langchain_pinecone import PineconeVectorStore
+
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -36,15 +39,19 @@ def generate_embeddings(text_chunks):
 
 def get_vector_store(text_chunks):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    vectors = generate_embeddings(text_chunks)
+    #vectors = generate_embeddings(text_chunks)
     
     # Initialize Pinecone
     pc = Pinecone(api_key=PINECONE_API_KEY)
     index_name = "llm"
+
     
+    docsearch = PineconeVectorStore.from_documents(text_chunks, embeddings, index_name=index_name)
+
     # Upsert items into the vector store with associated embeddings
-    pc.upsert(index_name, text_chunks, vectors)
-    return pc
+    #index.upsert(vectors, ids=ids)  # Upsert the data with optional IDs
+    #pc.upsert(index_name, text_chunks, vectors)
+    return docsearh
 
 def get_conversational_chain(vector_store):
     llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=API_KEY, temperature=0.1)
