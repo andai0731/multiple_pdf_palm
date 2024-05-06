@@ -38,9 +38,9 @@ def get_vector_store(text_chunks):
 def get_conversational_chain(vector_store):
     #llm=GooglePalm()
     llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=API, temperature=0.1)
-    #memory = ConversationBufferMemory(memory_key = "chat_history", return_messages=True)
-    #conversation_chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=vector_store.as_retriever(), memory=memory)
-    conversation_chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=vector_store.as_retriever())
+    memory = ConversationBufferMemory(memory_key = "chat_history", return_messages=True)
+    conversation_chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=vector_store.as_retriever(), memory=memory)
+    #conversation_chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=vector_store.as_retriever())
     return conversation_chain
 
 def user_input(user_question):
