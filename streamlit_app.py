@@ -10,7 +10,12 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 import os
 
-os.environ['GOOGLE_API_KEY'] =  'AIzaSyAWtXHiIVP3GYwmwf4rOEsJKXKtPCsDUkc'
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+#os.environ['GOOGLE_API_KEY'] =  'AIzaSyAWtXHiIVP3GYwmwf4rOEsJKXKtPCsDUkc'
 
 def get_pdf_text(pdf_docs):
     text=""
