@@ -27,6 +27,24 @@ def get_pdf_text(pdf_docs):
             text += page.extract_text()
     return text
 
+def get_vector_store(text_chunks):
+    """
+    Creates a Pinecone index and upserts vectors generated from the provided text chunks.
+
+    Args:
+        text_chunks (list): A list of text strings to be embedded and stored in Pinecone.
+
+    Returns:
+        pinecone.Index: The Pinecone index object where the vectors are stored.
+
+    Raises:
+        ValueError: If no text chunks are provided.
+    """
+    if not text_chunks:
+        raise ValueError("Please provide a list of text chunks for embedding and storing.")
+
+
+
 def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
     chunks = text_splitter.split_text(text)
@@ -34,15 +52,14 @@ def get_text_chunks(text):
 
 def get_vector_store(text_chunks):
     embeddings = GooglePalmEmbeddings()
+    vectors = embeddings.get_vectors(text_chunks)
     # Initialize Pinecone
     #Pinecone(api_key=PINECONE)  # Use your Pinecone API key
-
-
     pc = Pinecone(api_key="081c6b89-ff28-4673-9a4b-5912b5cfcff3")
     index = pc.Index("llm")
     #vector_store = pinecone.Index("llm")
     vector_store = index
-    vector_store.upsert(items=text_chunks, ids=range(len(text_chunks)))
+    vector_store.upsert(vectors, ids=range(len(text_chunks)))
     return vector_store
 
 def get_conversational_chain(vector_store):
