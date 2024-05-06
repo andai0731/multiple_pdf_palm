@@ -6,4 +6,4 @@ streamlit
 langchain_community
 langchain-google-genai
 python-dotenv
-pinecone
+pinecone-client
