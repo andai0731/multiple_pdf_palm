@@ -44,7 +44,7 @@ def get_vector_store(text_chunks):
     # Initialize Pinecone
     pc = Pinecone(api_key=PINECONE_API_KEY)
     index_name = "llm"
-    docsearch = PineconeVectorStore.from_documents(text_chunks, embeddings, index_name=index_name)
+    docsearch = PineconeVectorStore.from_documents(text_chunks= text_chunks, embeddings, index_name=index_name)
 
     # Upsert items into the vector store with associated embeddings
     #index.upsert(vectors, ids=ids)  # Upsert the data with optional IDs
