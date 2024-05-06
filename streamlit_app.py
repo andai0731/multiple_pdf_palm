@@ -30,10 +30,10 @@ def get_pdf_text(pdf_docs):
 
 def get_text_chunks(text):
     #text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
-    loader = TextLoader(text)
-    documents = loader.load()
+    #loader = TextLoader(text)
+    #documents = loader.load()
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
-    chunks = text_splitter.split_documents(documents)
+    chunks = text_splitter.split_documents(text)
     #chunks = text_splitter.split_text(text)
     return chunks
 
