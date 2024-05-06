@@ -7,3 +7,4 @@ langchain_community
 langchain-google-genai
 python-dotenv
 pinecone-client
+langchain-pinecone
