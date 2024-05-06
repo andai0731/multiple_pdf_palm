@@ -35,7 +35,7 @@ def get_text_chunks(text):
 
 
 def generate_embeddings(text_chunks):
-    llm = GooglePalm()
+    llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=API, temperature=0.1)
     embeddings_list = [llm.embed(text) for text in text_chunks]
     return embeddings_list
 
