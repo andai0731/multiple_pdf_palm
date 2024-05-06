@@ -8,8 +8,10 @@ from langchain.memory import ConversationBufferMemory
 from dotenv import load_dotenv
 from pinecone import Pinecone
 import os
-
 from langchain_pinecone import PineconeVectorStore
+from langchain_community.document_loaders import TextLoader
+#from langchain_openai import OpenAIEmbeddings
+from langchain_text_splitters import CharacterTextSplitter
 
 
 # Load environment variables from .env file
@@ -27,14 +29,14 @@ def get_pdf_text(pdf_docs):
     return text
 
 def get_text_chunks(text):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
-    chunks = text_splitter.split_text(text)
+    #text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
+    loader = TextLoader(text)
+    documents = loader.load()
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    chunks = text_splitter.split_documents(documents)
+    #chunks = text_splitter.split_text(text)
     return chunks
-    
-#def generate_embeddings(text_chunks):                                    
-#    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-#    vectors = embeddings.embed_query(text_chunks)
-#    return vectors  
+
 
 
 def get_vector_store(text_chunks):
