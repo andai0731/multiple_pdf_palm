@@ -11,7 +11,11 @@ from langchain.memory import ConversationBufferMemory
 import os
 
 from dotenv import load_dotenv
-import pinecone
+#import pinecone
+from pinecone import Pinecone
+
+#pc = Pinecone(api_key="081c6b89-ff28-4673-9a4b-5912b5cfcff3")
+#index = pc.Index("quickstart")
 
 # Load environment variables from .env file
 load_dotenv()
@@ -35,7 +39,7 @@ def get_vector_store(text_chunks):
     embeddings = GooglePalmEmbeddings()
     # Initialize Pinecone
     pinecone.init(api_key=os.getenv("PINECONE_API_KEY"))  # Use your Pinecone API key
-    vector_store = pinecone.Index("my-index")
+    vector_store = pinecone.Index("llm")
     vector_store.upsert(items=text_chunks, ids=range(len(text_chunks)))
     return vector_store
 
