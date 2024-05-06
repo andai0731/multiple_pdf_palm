@@ -3,3 +3,5 @@ langchain
 PyPDF2
 faiss-cpu
 streamlit
+langchain_community
+langchain-google-genai
