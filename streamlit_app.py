@@ -3,12 +3,11 @@ from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_google_genai import GoogleGenerativeAI
-from langchain.vectorstores import PineconeVectorStore
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
-import os
 from dotenv import load_dotenv
 from pinecone import Pinecone
+import os
 
 # Load environment variables from .env file
 load_dotenv()
@@ -41,11 +40,10 @@ def get_vector_store(text_chunks):
     # Initialize Pinecone
     pc = Pinecone(api_key=PINECONE_API_KEY)
     index_name = "llm"
-    vector_store = PineconeVectorStore(pc, index_name)
-
+    
     # Upsert items into the vector store with associated embeddings
-    vector_store.upsert(text_chunks, vectors)
-    return vector_store
+    pc.upsert(index_name, text_chunks, vectors)
+    return pc
 
 def get_conversational_chain(vector_store):
     llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=API_KEY, temperature=0.1)
