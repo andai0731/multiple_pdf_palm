@@ -43,6 +43,7 @@ def generate_embeddings(text_chunks):
 
 def get_vector_store(text_chunks):
     embeddings = GooglePalmEmbeddings()
+    vectors = generate_embeddings(text_chunks)
     # Initialize Pinecone
     #Pinecone(api_key=PINECONE)  # Use your Pinecone API key
     pc = Pinecone(api_key="081c6b89-ff28-4673-9a4b-5912b5cfcff3")
