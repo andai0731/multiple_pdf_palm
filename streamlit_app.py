@@ -14,9 +14,6 @@ from dotenv import load_dotenv
 #import pinecone
 from pinecone import Pinecone
 
-pc = Pinecone(api_key="081c6b89-ff28-4673-9a4b-5912b5cfcff3")
-index = pc.Index("llm")
-
 # Load environment variables from .env file
 load_dotenv()
 
@@ -38,8 +35,11 @@ def get_text_chunks(text):
 def get_vector_store(text_chunks):
     embeddings = GooglePalmEmbeddings()
     # Initialize Pinecone
-    #Pinecone.init(api_key=PINECONE)  # Use your Pinecone API key
-    pc.init(api_key=PINECONE)
+    #Pinecone(api_key=PINECONE)  # Use your Pinecone API key
+
+
+    pc = Pinecone(api_key="081c6b89-ff28-4673-9a4b-5912b5cfcff3")
+    index = pc.Index("llm")
     #vector_store = pinecone.Index("llm")
     vector_store = index
     vector_store.upsert(items=text_chunks, ids=range(len(text_chunks)))
