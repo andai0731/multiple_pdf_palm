@@ -33,6 +33,14 @@ def get_text_chunks(text):
     chunks = text_splitter.split_text(text)
     return chunks
 
+
+def generate_embeddings(text_chunks):
+    llm = GooglePalm()
+    embeddings_list = [llm.embed(text) for text in text_chunks]
+    return embeddings_list
+
+
+
 def get_vector_store(text_chunks):
     embeddings = GooglePalmEmbeddings()
     # Initialize Pinecone
@@ -40,9 +48,8 @@ def get_vector_store(text_chunks):
     pc = Pinecone(api_key="081c6b89-ff28-4673-9a4b-5912b5cfcff3")
     index = pc.Index("llm")
     vector_store = index
-    #vector_store = pinecone.Index("llm")
-    # Calculate embeddings for each text chunk
-    embeddings_list = [embeddings.embed(text) for text in text_chunks]
+
+    embeddings_list = Pinecone.from_texts([t.page_content for t in text_chunks], embeddings, index_name=index_name)
     # Upsert items into the vector store with associated embeddings
     vector_store.upsert(items=text_chunks, ids=range(len(text_chunks)), vectors=embeddings_list)
     return vector_store
