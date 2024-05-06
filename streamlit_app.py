@@ -11,7 +11,7 @@ from langchain.memory import ConversationBufferMemory
 import os
 
 from dotenv import load_dotenv
-
+API = os.getenv("GOOGLE_API_KEY")
 # Load environment variables from .env file
 load_dotenv()
 
