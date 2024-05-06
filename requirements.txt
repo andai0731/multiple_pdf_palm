@@ -5,4 +5,4 @@ faiss-cpu
 streamlit
 langchain_community
 langchain-google-genai
-dotenv
+python-dotenv
