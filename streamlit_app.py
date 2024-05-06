@@ -31,21 +31,17 @@ def get_text_chunks(text):
     chunks = text_splitter.split_text(text)
     return chunks
     
-def generate_embeddings(text_chunks):                                    
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    vectors = embeddings.embed_query(text_chunks)
-    return vectors  
+#def generate_embeddings(text_chunks):                                    
+#    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+#    vectors = embeddings.embed_query(text_chunks)
+#    return vectors  
 
 
 def get_vector_store(text_chunks):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    #vectors = generate_embeddings(text_chunks)
-    
     # Initialize Pinecone
     pc = Pinecone(api_key=PINECONE_API_KEY)
     index_name = "llm"
-
-    
     docsearch = PineconeVectorStore.from_documents(text_chunks, embeddings, index_name=index_name)
 
     # Upsert items into the vector store with associated embeddings
