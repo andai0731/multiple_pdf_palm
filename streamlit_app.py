@@ -13,6 +13,7 @@ import os
 from dotenv import load_dotenv
 #import pinecone
 from pinecone import Pinecone
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 # Load environment variables from .env file
 load_dotenv()
@@ -34,9 +35,11 @@ def get_text_chunks(text):
     return chunks
 
 
-def generate_embeddings(text_chunks):
-    llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=API, temperature=0.1)
-    embeddings_list = [llm.embed(text) for text in text_chunks]
+def generate_embeddings(text_chunks):      
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    vector = embeddings.embed_query(text_chunks)
+    #llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=API, temperature=0.1)
+    embeddings_list = vector
     return embeddings_list
 
 
