@@ -7,3 +7,6 @@ langchain_community
 langchain-google-genai
 python-dotenv
 langchain-groq
+unstructured
+unstructured-client
+fastembed
