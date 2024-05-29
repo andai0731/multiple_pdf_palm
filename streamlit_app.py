@@ -2,6 +2,7 @@ import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import google.generativeai as palm
+from langchain_groq import ChatGroq
 from langchain.embeddings import GooglePalmEmbeddings
 from langchain.llms import GooglePalm
 from langchain_google_genai import GoogleGenerativeAI
