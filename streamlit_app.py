@@ -12,10 +12,13 @@ from langchain.memory import ConversationBufferMemory
 import os
 
 from dotenv import load_dotenv
-API = os.getenv("GOOGLE_API_KEY")
+#API = os.getenv("GOOGLE_API_KEY")
+#groq_api_key = os.getenv("groq_api_key") 
 # Load environment variables from .env file
 load_dotenv()
 
+API = os.getenv("GOOGLE_API_KEY")
+groq_api_key = os.getenv("groq_api_key")
 #os.environ['GOOGLE_API_KEY'] =  'AIzaSyAWtXHiIVP3GYwmwf4rOEsJKXKtPCsDUkc'
 
 def get_pdf_text(pdf_docs):
